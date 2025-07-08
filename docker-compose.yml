@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  ragbot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ragbot
+    ports:
+      - "7860:7860"
+    env_file:
+      - .env
+    volumes:
+      - ./knowledge-base:/app/knowledge-base
+      - vectorstore:/app/vector_db
+    restart: unless-stopped
+
+volumes:
+  vectorstore:
